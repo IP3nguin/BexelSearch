@@ -1,6 +1,8 @@
 <docTYPE! HTML>
 <HTML>
-<head></head>
+<head>
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
 
 <body onload = "hideDiv()",>
 	<h2>Welcome to The Landing Page!</h2>
@@ -61,5 +63,76 @@
 		document.getElementById('LogInFormDiv').style.display = 'inline';
 		document.getElementById('SignUpFormDiv').style.display = 'none';
 	}
+</script>
+</body><docTYPE! HTML>
+<HTML>
+<head>
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body onload = "hideDiv()",>
+	<h2>Welcome to The Landing Page!</h2>
+	
+	<div class = "Search">
+	Search bar here
+	</div><br>
+	<div class = "buttons">
+		<button type = "button" id= "SignUpBut" onclick = "showSUDiv()">Sign Up here!</button>	       
+		<button type = "button" id= "LogInBut" onclick = "showLIDiv()">Log In Here!</button>
+	</div>
+	
+	<br><br><br>
+	<div id= "SignUpFormDiv" >
+		<h3>Register</h3>
+		<br>
+		<form id = "SignUpForm">
+			First Name: <input type = "text" id = "sufirstname"><br>
+			Last Name: <input type = "text" id = "sulastname"><br>
+			Username: <input type = "text" id = "suusername"><br>
+			E-mail Address: <input type = "text" id = "suemail"><br>
+			Password: <input type = "text" id = "supassword"><br>
+			Gender: <input type="radio" name="gender" value="male" checked> Male<br>
+					<input type="radio" name="gender" value="female"> Female<br>
+					<input type="radio" name="gender" value="other"> Other<br>
+					<br>
+					<input type="submit" value="Sign Up!!">
+		</form>
+	</div>
+	<br><br><br>
+	
+	<div id= "LogInFormDiv">
+		<h3>Log In</h3>
+		<br>
+		<form id = "LogInForm">
+			Username or E-mail Address: <input type = "text" id = "liname"><br>
+			Password: <input type = "text" id = "lipassword"><br>
+			<br>
+			<input type="submit" value="Log In!!">
+		</form>
+	</div>
+	
+<script>
+	$( "#SignUpBut" ).click(function() {
+		$("#LogInFormDiv").hide()
+  		$( "#SignUpFormDiv" ).slideToggle( "slow", function() {
+    		// Animation complete.
+  		});
+	});
+	
+	$( "#LogInBut" ).click(function() {
+		$("#SignUpFormDiv").hide()
+  		$( "#LogInFormDiv" ).slideToggle( "slow", function() {
+    		// Animation complete.
+  		});
+	});
+
+	$(document).ready(function() {
+		$("#SignUpFormDiv").hide();
+	});
+	$(document).ready(function() {
+		$("#LogInFormDiv").hide();
+	});
+
+
 </script>
 </body>
