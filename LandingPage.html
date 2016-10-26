@@ -5,7 +5,7 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
-<body onload = "hideDiv()",>
+<body>
     
 	<h2>Welcome to The Landing Page!</h2>
 	
@@ -33,10 +33,7 @@
 			Last Name: <input type = "text" id = "sulastname"><br>
 			Username: <input type = "text" id = "suusername"><br>
 			E-mail Address: <input type = "text" id = "suemail"><br>
-			Password: <input type = "text" id = "supassword"><br>
-			Gender: <input type="radio" name="gender" value="male" checked> Male<br>
-					<input type="radio" name="gender" value="female"> Female<br>
-					<input type="radio" name="gender" value="other"> Other<br>
+			Password: <input type = "password" id = "supassword"><br>
 					<br>
             <input type="submit" value="Sign Up!!" onclick="signUp()">
             
@@ -53,7 +50,7 @@
 		<form id = "LogInForm">
             
 			Username or E-mail Address: <input type = "text" id = "liname"><br>
-			Password: <input type = "text" id = "lipassword"><br>
+			Password: <input type = "password" id = "lipassword"><br>
 			<br>
 			<input type="submit" value="Log In!!">
             
