@@ -1,26 +1,86 @@
 <!DOCTYPE HTML>
 <head>
+
 	<title>Register Class</title>
+	
+	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--test compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
 <head>
 <body>
-	<h3> Register a new class </h3>
-	<form>
-		Class Title: <input type = "text" name="title"></br>
-		Description: <input type = "text" name="desc"></br>
-		Location: <input type = "text" name="loc"></br>
-		Class Instructor: <input type = "text" name="instr"></br>
-		Phone: <input type = "text" name="phone"></br>
-		Email: <input type = "text" name="email"></br>
-		Website: <input type = "text" name="web"></br>
-		Facebook: <input type = "text" name="face"></br>
-		Twitter: <input type = "text" name="tweet"></br></br>
-		<input type = "submit" value="Submit"></br>
-
-
+	<form class = "form-horizontal">
+		<div class="col-sm-offset-2 col-sm-10">
+			<h3> Register a new class </h3></br></br>
+		</div>	
+		<div class = "form-group">
+			<label class = "control-label col-sm-2" for= "title">Class Title:</label>
+				<input id ="title" type = "text" name="title"></br>
+			<label class = "control-label col-sm-2" for= "desc">Description:</label>
+				<input id = "desc" type = "text" name="desc"></br>
+			<label class = "control-label col-sm-2" for= "title">Location:</label>
+				<input id = "loc" type = "text" name="loc"></br>
+			<label class = "control-label col-sm-2" for= "instr">Class Instructor:</label>
+				<input id = "instr" type = "text" name="instr"></br>
+			<label class = "control-label col-sm-2" for= "phone">Phone:</label>
+				<input id = "phone" type = "text" name="phone"></br>
+			<label class = "control-label col-sm-2" for= "email">Email:</label>
+				<input id = "email" type = "text" name="email"></br>
+			<label class = "control-label col-sm-2" for= "web">Website:</label>
+				<input id = "web" type = "text" name="web"></br>
+			<label class = "control-label col-sm-2" for= "face">Facebook:</label>
+				<input id = "face" type = "text" name="face"></br>
+			<label class = "control-label col-sm-2" for= "tweet">Twitter:</label>
+				<input id = tweet" type = "text" name="tweet"></br></br>
+			<div class="col-sm-offset-2 col-sm-10">
+      				<button type="submit" class="btn btn-default">Submit</button>
+  			</div>
+		</div>
+	</form>
 
 <script>
 //TODO add database submit query
 </script>
+<style>
+	    /* Remove the navbar's default margin-bottom and rounded borders */ 
+	    .navbar {
+    		margin-bottom: 0;
+	      border-radius: 0;
+	    }
+    
+	    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+	    .row.content {height: 450px}
+    
+	    /* Set gray background color and 100% height */
+	    .sidenav {
+	      padding-top: 20px;
+	      background-color: #f1f1f1;
+	      height: 100%;
+	    }
+    
+	    /* Set black background color, white text and some padding */
+	    footer {
+	      background-color: #555;
+	      color: white;
+	      padding: 15px;
+	    }
+    
+	    /* On small screens, set height to 'auto' for sidenav and grid */
+	    @media screen and (max-width: 767px) {
+	      .sidenav {
+	        height: auto;
+	        padding: 15px;
+	      }
+	      .row.content {height:auto;} 
+	    }
+	  </style>
 
-
-<body>
+</body>
