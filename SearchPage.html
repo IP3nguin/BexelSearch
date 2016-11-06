@@ -15,13 +15,13 @@
 </body>
 <script>
  var map;
- var myLatlng1 = new google.maps.LatLng(53.38914, -6.600050); //Default Location
+ var Latlng = new google.maps.LatLng(53.38914, -6.600050); //Default Location
 
  function initialize() {
 
      var mapOptions = {
          zoom: 13,
-         center: myLatlng1,
+         center: Latlng,
          mapTypeId: google.maps.MapTypeId.ROADMAP
      };
      var map = new google.maps.Map(document.getElementById('map'), mapOptions); //Create new map
