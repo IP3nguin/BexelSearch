@@ -2,16 +2,29 @@
     <HTML>
 
     <head>
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- load jquery -->
+        <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+        <!-- load firebase library -->
+        <script>
+            // initialise firebase
+            var config = {
+                apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g",
+                authDomain: "bexel-ed8b3.firebaseapp.com",
+                databaseURL: "https://bexel-ed8b3.firebaseio.com",
+                storageBucket: "bexel-ed8b3.appspot.com",
+                messagingSenderId: "325793789014"
+            };
+            firebase.initializeApp(config);
+
+        </script>
+        <script type="text/javascript" src="splashJS.js"></script>
+
     </head>
 
     <body>
 
         <h2>Welcome to The Landing Page!</h2>
-
-        <div class="Search">
-            Search bar here
-        </div><br>
 
         <div class="buttons">
 
@@ -22,7 +35,7 @@
 
         <br><br><br>
 
-        <div id="SignUpFormDiv">
+        <div id="SignUpFormDiv" style="display:none;">
 
             <h3>Register</h3>
             <br>
@@ -42,7 +55,7 @@
 
         <br><br><br>
 
-        <div id="LogInFormDiv">
+        <div id="LogInFormDiv" style="display:none;">
 
             <h3>Log In</h3>
             <br>
@@ -57,137 +70,29 @@
             </form>
         </div>
 
-
-
-        <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
-        <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g",
-                authDomain: "bexel-ed8b3.firebaseapp.com",
-                databaseURL: "https://bexel-ed8b3.firebaseio.com",
-                storageBucket: "bexel-ed8b3.appspot.com",
-                messagingSenderId: "325793789014"
-            };
-            firebase.initializeApp(config);
-
-        </script>
-
-        <script type="text/javascript">
-            function signUp() {
-                var email = document.getElementById('suemail').value;
-                var password = document.getElementById('supassword').value;
-                var userName = document.getElementById('suusername').value;
-                var firstName = document.getElementById('sufirstname').value;
-                var lastName = document.getElementById('sulastname').value;
-
-
-                alert(email + " " + password);
-                if (email.length < 4) {
-                    alert('Please enter an email address.');
-                    return;
-                }
-                if (password.length < 4) {
-                    alert('Please enter a longer password.');
-                    return;
-                }
-
-                firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-
-                    alert(errorMessage);
-                    console.log(error);
-
-                });
-                saveDetails(userName, firstName, lastName, email);
-            }
-
-            function logIn() {
-
-                var email = document.getElementById('logEmail').value;
-                var password = document.getElementById('logPass').value;
-
-                if (email.length < 4) {
-                    alert('Please enter an email address.');
-                    return;
-                }
-                if (password.length < 4) {
-                    alert('Please enter a password.');
-                    return;
-                }
-
-                firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-
-                    if (errorCode === 'auth/wrong-password') {
-                        alert('Wrong password.');
-                    } else {
-                        alert(errorMessage);
-                    }
-                    console.log(error);
-
-                });
-
-
-
-            }
-
-            function saveDetails(user, first, last, email) {
-                var database = firebase.database();
-                var uId = firebase.auth().currentUser.uid;
-
-                firebase.database().ref('users/' + uId).set({
-                    "username": user,
-                    "firstName": first,
-                    "lastName": last,
-                    "email": email
-                });
-
-            }
-
-            window.onload = function() {
-                watchLogin();
-            }
-
-            function watchLogin() {
-
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (user) {
-                        window.location = 'homePage.html';
-                    }
-                });
-            }
-
-
-
-
-            $("#SignUpBut").click(function() {
-                $("#LogInFormDiv").hide()
-                $("#SignUpFormDiv").slideToggle("slow", function() {
-                    // Animation complete.
-                });
-            });
-
-            $("#LogInBut").click(function() {
-                $("#SignUpFormDiv").hide()
-                $("#LogInFormDiv").slideToggle("slow", function() {
-                    // Animation complete.
-                });
-            });
-
-            $(document).ready(function() {
-                $("#SignUpFormDiv").hide();
-            });
-            $(document).ready(function() {
-                $("#LogInFormDiv").hide();
-            });
-
-        </script>
-
-
     </body>
+
+    <script>
+        //look at rewriting this, is not optimal, can see it load in.
+        $("#SignUpBut").click(function() {
+            $("#LogInFormDiv").hide()
+            $("#SignUpFormDiv").slideToggle("slow", function() {
+                // Animation complete.
+            });
+        });
+
+        $("#LogInBut").click(function() {
+            $("#SignUpFormDiv").hide()
+            $("#LogInFormDiv").slideToggle("slow", function() {
+                // Animation complete.
+            });
+        });
+
+        $(document).ready(function() {
+            $("#SignUpFormDiv").hide();
+            $("#LogInFormDiv").hide();
+        });
+
+    </script>
 
     </HTML>
