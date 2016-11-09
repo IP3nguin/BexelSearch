@@ -16,7 +16,7 @@
 	
 
 <head>
-<body>
+<body onload = "initialize()">
 
 	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 	<form class = "form-horizontal">
@@ -50,8 +50,10 @@
 	</form>
 
 <script>
- var map;
- var Latlng = new google.maps.LatLng(53.38914, -6.600050); //Default Location
+var map;
+var Latlng = new google.maps.LatLng(53.38914, -6.600050); //Default Location
+var clickLat;
+var clickLon;
 
  function initialize() {
 
@@ -67,6 +69,24 @@
              initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //Get User location using GeoLocation API
              map.setCenter(initialLocation); // Refresh map to centre on user location
          });
+		  		 
+		 google.maps.event.addListener(map, 'click', function(event) {
+			placeMarker(event.latLng);
+		
+			clickLat = event.latLng.lat();
+			clickLon = event.latLng.lng();
+
+                // show in input box
+			document.getElementById("lat").value = clickLat.toFixed(5);
+			document.getElementById("lon").value = clickLon.toFixed(5);
+		});
+
+		function placeMarker(location) {
+			var marker = new google.maps.Marker({
+				position: location, 
+				map: map
+			});
+		}
      }
  }
  initialize();
