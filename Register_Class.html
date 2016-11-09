@@ -54,6 +54,8 @@ var map;
 var Latlng = new google.maps.LatLng(53.38914, -6.600050); //Default Location
 var clickLat;
 var clickLon;
+var marker;
+
 
  function initialize() {
 
@@ -75,17 +77,19 @@ var clickLon;
 		
 			clickLat = event.latLng.lat();
 			clickLon = event.latLng.lng();
-
-                // show in input box
-			document.getElementById("lat").value = clickLat.toFixed(5);
-			document.getElementById("lon").value = clickLon.toFixed(5);
+			
 		});
 
 		function placeMarker(location) {
-			var marker = new google.maps.Marker({
-				position: location, 
-				map: map
-			});
+			if(!marker){
+				marker = new google.maps.Marker({
+					position: location, 
+					map: map
+				});
+			}
+			else{
+				marker.setPosition(location);
+			}
 		}
      }
  }
