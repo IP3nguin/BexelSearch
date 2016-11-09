@@ -1,0 +1,49 @@
+<DOCTYPE! HTML>
+<HTML>
+	<head>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	</head>
+	<body>
+		<p id = "i">a</p>
+
+	<!-- Script for connecting Database-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+	</script>
+	<!-- load jquery -->
+	<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+	<!-- load firebase library -->
+	<script>
+	// initialise firebase
+	    var config = {
+	        apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g",
+	        authDomain: "bexel-ed8b3.firebaseapp.com",
+	        databaseURL: "https://bexel-ed8b3.firebaseio.com",
+	        storageBucket: "bexel-ed8b3.appspot.com",
+	        messagingSenderId: "325793789014"
+	    };
+	    firebase.initializeApp(config);
+	</script>
+
+	<!-- Script for Accessing Database-->
+	<script>
+		var rootRef = firebase.database().ref().child("Class");
+		
+		rootRef.on('child_added', snap =>{
+			alert("help");
+			var ClassInstructor = snap.child("ClassInstructor").val();
+			var ClassTitle = snap.child("ClassTitle").val();
+			var Description = snap.child("Description").val();
+			var Email = snap.child("Email").val();
+			var Facebook = snap.child("Facebook").val();
+			var Location = snap.child("Location").val();
+			var Phone = snap.child("Phone").val();
+			var Twitter = snap.child("Twitter").val();
+			var Website = snap.child("Website").val();
+
+			document.getElementById("i").innerHTML = ClassInstructor;			
+		});
+		
+	
+	</script>
+	</body>
+</HTML>
