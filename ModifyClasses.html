@@ -29,7 +29,7 @@
 		var rootRef = firebase.database().ref().child("Class");
 		
 		rootRef.on('child_added', snap =>{
-			alert("help");
+			
 			var ClassInstructor = snap.child("ClassInstructor").val();
 			var ClassTitle = snap.child("ClassTitle").val();
 			var Description = snap.child("Description").val();
@@ -42,6 +42,7 @@
 
 			document.getElementById("i").innerHTML = ClassInstructor;			
 		});
+		alert(ClassInstructor);
 		
 	
 	</script>
