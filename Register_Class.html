@@ -16,7 +16,9 @@
 	
 
 <head>
-<body>
+<body onload = "initialize()">
+
+	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 	<form class = "form-horizontal">
 		<div class="col-sm-offset-2 col-sm-10">
 			<h3> Register a new class </h3></br></br>
@@ -27,7 +29,8 @@
 			<label class = "control-label col-sm-2" for= "desc">Description:</label>
 				<input id = "desc" type = "text" name="desc"></br>
 			<label class = "control-label col-sm-2" for= "title">Location:</label>
-				<input id = "loc" type = "text" name="loc"></br>
+				<div id="map" style="width: 500px; height: 400px;"></div>
+
 			<label class = "control-label col-sm-2" for= "instr">Class Instructor:</label>
 				<input id = "instr" type = "text" name="instr"></br>
 			<label class = "control-label col-sm-2" for= "phone">Phone:</label>
@@ -47,7 +50,54 @@
 	</form>
 
 <script>
+var map;
+var Latlng = new google.maps.LatLng(53.38914, -6.600050); //Default Location
+var clickLat;
+var clickLon;
+var marker;
+
+
+ function initialize() {
+
+     var mapOptions = {
+         zoom: 13,
+         center: Latlng,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+     };
+     var map = new google.maps.Map(document.getElementById('map'), mapOptions); //Create new map
+
+     if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(function (position) {
+             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //Get User location using GeoLocation API
+             map.setCenter(initialLocation); // Refresh map to centre on user location
+         });
+		  		 
+		 google.maps.event.addListener(map, 'click', function(event) {
+			placeMarker(event.latLng);
+		
+			clickLat = event.latLng.lat();
+			clickLon = event.latLng.lng();
+			
+		});
+
+		function placeMarker(location) {
+			if(!marker){
+				marker = new google.maps.Marker({
+					position: location, 
+					map: map
+				});
+			}
+			else{
+				marker.setPosition(location);
+			}
+		}
+     }
+ }
+ initialize();
 //TODO add database submit query
+
+
+
 </script>
 <style>
 	    /* Remove the navbar's default margin-bottom and rounded borders */ 
