@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- load jquery -->
+        <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+        <!-- load firebase library -->
+        <script>
+            // initialise firebase
+            var config = {
+                apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g",
+                authDomain: "bexel-ed8b3.firebaseapp.com",
+                databaseURL: "https://bexel-ed8b3.firebaseio.com",
+                storageBucket: "bexel-ed8b3.appspot.com",
+                messagingSenderId: "325793789014"
+            };
+            firebase.initializeApp(config);
+
+        </script>
+    
 	<h1>Search</h1>
 </head>
-<body onload = "initialize()">
+<body onload="initialise()">
 
-<form onSubmit = "search()">
-  <input type="text" name="search" placeholder="Search..">
+<form id = "searchBox">
+  <input type="text" id = "search" name="search" placeholder="Search..">
 </form>
 
 <div id="map" style="width: 500px; height: 400px;"></div>
@@ -16,9 +33,9 @@
 <script>
  var map;
  var Latlng = new google.maps.LatLng(53.38914, -6.600050); //Default Location
+ var classRef = firebase.database().ref('classes');
 
- function initialize() {
-
+ function initialise() {
      var mapOptions = {
          zoom: 13,
          center: Latlng,
@@ -31,13 +48,30 @@
              initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //Get User location using GeoLocation API
              map.setCenter(initialLocation); // Refresh map to centre on user location
          });
-     }
+	}
  }
- initialize();
  </script>
 
 <script>
-	//Search way
-	//ref.child('users').orderByChild('name').equalTo('Alex').on('child_added',  ...)
+    var searchBox = document.getElementById("searchBox");
+    searchBox.onsubmit = function(search){
+        search.preventDefault();
+        var results=[];
+        var i = 0,temp = "";
+        
+        classRef.orderByChild("ClassTitle").on("value", function(snap){
+            snap.forEach(function(item){
+                results.push(item.val());
+            });
+            //console.log(results);
+        });
+        var searchString = $("#search").val();
+        results.forEach(function(item){
+            if(item.ClassTitle === searchString){
+                console.log(item.ClassTitle + " " + item.Facebook);
+            };
+        });
+        
+    }
 </script>
 </html>
