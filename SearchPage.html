@@ -30,14 +30,28 @@
 <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 
 </body>
+    
+    
 <script>
  var map;
- var Latlng = new google.maps.LatLng(53.38914, -6.600050); //Default Location
+ var Latlng = new google.maps.LatLng(70.38914, -6.600050); //Default Location
  var classRef = firebase.database().ref('classes');
+ var mapRefreshed = false;
+ var results=[];
+ var titles = [];
+ var instructors = [];
+ var descriptions = [];
+ var emails = [];
+ var facebooks = [];
+ var twitters = [];
+ var phones = [];
+ var websites = [];
+ var loclat = [];
+ var loclong = [];
 
  function initialise() {
      var mapOptions = {
-         zoom: 13,
+         zoom: 10,
          center: Latlng,
          mapTypeId: google.maps.MapTypeId.ROADMAP
      };
@@ -49,29 +63,75 @@
              map.setCenter(initialLocation); // Refresh map to centre on user location
          });
 	}
- }
- </script>
-
-<script>
-    var searchBox = document.getElementById("searchBox");
-    searchBox.onsubmit = function(search){
-        search.preventDefault();
-        var results=[];
-        var i = 0,temp = "";
-        
-        classRef.orderByChild("ClassTitle").on("value", function(snap){
-            snap.forEach(function(item){
-                results.push(item.val());
+    if(mapRefreshed){
+        var i = 0;
+        titles.forEach(function(item){
+            var contentString = "<h1>" + titles[i] + "</h1></br>" + descriptions[i] + "</br>";
+            var ClassLoc=new google.maps.LatLng(loclat[i], loclong[i]);
+            console.log(ClassLoc.lat());
+            console.log(ClassLoc.lng());
+            
+            var marker = new google.maps.Marker({
+                position: ClassLoc,
+                map: map
             });
-            //console.log(results);
+       
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+                });
+    
+            //infowindow.open(map,marker);
+            ++i;
+            
         });
-        var searchString = $("#search").val();
-        results.forEach(function(item){
-            if(item.ClassTitle === searchString){
-                console.log(item.ClassTitle + " " + item.Facebook);
-            };
+        mapRefreshed = false;
+    }
+    
+ }
+
+var searchBox = document.getElementById("searchBox");
+    
+searchBox.onsubmit = function(search){
+    search.preventDefault();
+    results=[];
+    var i = 0,temp = "";
+    
+    classRef.orderByChild("ClassTitle").on("value", function(snap){
+        snap.forEach(function(item){
+        results.push(item.val());
         });
         
-    }
+    });
+    titles = [];
+    instructors = [];
+    descriptions = [];
+    emails = [];
+    facebooks = [];
+    twitters = [];
+    phones = [];
+    websites = [];
+    loclat = [];
+    loclong = [];
+         
+    var searchString = $("#search").val();
+    results.forEach(function(item){
+        if(item.ClassTitle === searchString){
+            titles.push(item.ClassTitle);
+            instructors.push(item.ClassInstructor);
+            descriptions.push(item.Description);
+            emails.push(item.Email);
+            facebooks.push(item.Facebook);
+            twitters.push(item.Twitter);
+            phones.push(item.Phone);
+            websites.push(item.Website);
+            loclat.push(item.LocationLat);
+            loclong.push(item.LocationLong);
+        };
+    });
+    mapRefreshed = true;
+    initialise();
+    
+    
+}
 </script>
 </html>
