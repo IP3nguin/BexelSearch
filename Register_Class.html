@@ -5,6 +5,7 @@
 	
 	<meta charset="utf-8">
  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    
 	<!--test compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -17,37 +18,40 @@
 
 <head>
 <body onload = "initialize()">
+    <div class = "container">
 
 	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 	<form class = "form-horizontal">
 		<div class="col-sm-offset-2 col-sm-10">
-			<h3> Register a new class </h3></br></br>
+			<h3> Register a new class </h3><br><br>
 		</div>	
-		<div class = "form-group">
-			<label class = "control-label col-sm-2" for= "title">Class Title:</label>
-				<input id ="title" type = "text" name="title"></br>
-			<label class = "control-label col-sm-2" for= "desc">Description:</label>
-				<input id = "desc" type = "text" name="desc"></br>
-			<label class = "control-label col-sm-2" for= "title">Location:</label>
+		  <div class = "form-group">
+            <label class = "control-label" for= "title">Class Title:</label>
+                <input class = "form-control col-xs-10" id ="title" type = "text" name="title"><br>
+            <label class = "control-label" for= "desc">Description:</label>
+                <input class = "form-control col-xs-10" id = "desc" type = "text" name="desc"><br>
+			<label class = "control-label" for= "title">Location:</label>
 				<div id="map" style="width: 500px; height: 400px;"></div>
 
-			<label class = "control-label col-sm-2" for= "instr">Class Instructor:</label>
-				<input id = "instr" type = "text" name="instr"></br>
-			<label class = "control-label col-sm-2" for= "phone">Phone:</label>
-				<input id = "phone" type = "text" name="phone"></br>
-			<label class = "control-label col-sm-2" for= "email">Email:</label>
-				<input id = "email" type = "text" name="email"></br>
-			<label class = "control-label col-sm-2" for= "web">Website:</label>
-				<input id = "web" type = "text" name="web"></br>
-			<label class = "control-label col-sm-2" for= "face">Facebook:</label>
-				<input id = "face" type = "text" name="face"></br>
-			<label class = "control-label col-sm-2" for= "tweet">Twitter:</label>
-				<input id = tweet" type = "text" name="tweet"></br></br>
-			<div class="col-sm-offset-2 col-sm-10">
-      				<button type="submit" class="btn btn-default">Submit</button>
+			<label class = "control-label" for= "instr">Class Instructor:</label>
+				<input class = "form-control col-xs-10" id = "instr" type = "text" name="instr"><br>
+			<label class = "control-label" for= "phone">Phone:</label>
+				<input class = "form-control col-xs-10" id = "phone" type = "text" name="phone"><br>
+			<label class = "control-label" for= "email">Email:</label>
+				<input class = "form-control col-xs-10" id = "email" type = "text" name="email"><br>
+			<label class = "control-label" for= "web">Website:</label>
+				<input class = "form-control col-xs-10" id = "web" type = "text" name="web"><br>
+			<label class = "control-label" for= "face">Facebook:</label>
+				<input class = "form-control col-xs-10" id = "face" type = "text" name="face"><br>
+			<label class = "control-label" for= "tweet">Twitter:</label>
+				<input class = "form-control col-xs-10" id = "tweet" type = "text" name="tweet" ><br><br>
+			<div class="col-sm-offset-2">
+      		    <br><button type="submit" class="btn btn-default">Submit</button>
   			</div>
-		</div>
-	</form>
+		  </div>
+	   </form>
+    </div>
+</body>
 
 <script>
 var map;
@@ -101,4 +105,4 @@ var marker;
 </script>
 
 
-</body>
+
