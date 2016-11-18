@@ -51,7 +51,7 @@
 
  function initialise() {
      var mapOptions = {
-         zoom: 10,
+         zoom: 11,
          center: Latlng,
          mapTypeId: google.maps.MapTypeId.ROADMAP
      };
@@ -68,9 +68,6 @@
         titles.forEach(function(item){
             var contentString = "<h1>" + titles[i] + "</h1></br>" + descriptions[i] + "</br>";
             var ClassLoc=new google.maps.LatLng(loclat[i], loclong[i]);
-            console.log(ClassLoc.lat());
-            console.log(ClassLoc.lng());
-            
             var marker = new google.maps.Marker({
                 position: ClassLoc,
                 map: map
@@ -80,7 +77,9 @@
                 content: contentString
                 });
     
-            //infowindow.open(map,marker);
+            google.maps.event.addListener( marker, "click", function(e) {
+                infoWindow.open(map, marker);
+            });
             ++i;
             
         });
