@@ -37,17 +37,6 @@
     var Latlng = new google.maps.LatLng(70.38914, -6.600050); //Default Location
     var classRef = firebase.database().ref('classes');
     var mapRefreshed = false;
-    var results=[];
-    var titles = [];
-    var instructors = [];
-    var descriptions = [];
-    var emails = [];
-    var facebooks = [];
-    var twitters = [];
-    var phones = [];
-    var websites = [];
-    var loclat = [];
-    var loclong = [];
 
     function initialise() {
         var mapOptions = {
@@ -64,28 +53,29 @@
             });
         }
         if(mapRefreshed){ //if the user has searched for something
-            var i = 0;
-            titles.forEach(function(item){ //go through each value in the Titles array to place markers and infowindows
-
-                var contentString = "<h2>" + titles[i] + "</h2>\n" + descriptions[i] + "\n<h4>Instructor: </h4>" + instructors[i] + "\n<h4>Email:  </h4>" + emails[i] + "\n<h4>Facebook: </h4>" + facebooks[i] + "\n<h4>Twitter: </h4>" + twitters[i] + "\n<h4>Phone: </h4>" + phones[i] + "\n<h4>Website: </h4>" + websites[i]; //set the content string for this title
             
-                var ClassLoc=new google.maps.LatLng(loclat[i], loclong[i]); //set the location for this title
-                var marker = new google.maps.Marker({ //place the marker for this title
-                    position: ClassLoc,
-                    map: map
-                });
+             var searchString = $("#search").val(); //pulls search term from the HTML page
+             classRef.orderByChild("ClassTitle").equalTo(searchString).on("value", function(snap){ //pull a snapshot of the database from firebase
+                snap.forEach(function(item){
+                        var contentString = "<h2>" + item.val().ClassTitle + "</h2>\n" + item.val().ClassDescription + "\n<h4>Instructor: </h4>" + item.val().ClassInstructor + "\n<h4>Email:  </h4>" + item.val().Email + "\n<h4>Facebook: </h4>" + item.val().Facebook + "\n<h4>Twitter: </h4>" + item.val().Twitter + "\n<h4>Phone: </h4>" + item.val().Phone + "\n<h4>Website: </h4>" + item.val().Website; //set the content string for this title
+                     
+                        var ClassLoc=new google.maps.LatLng(item.val().LocationLat, item.val().LocationLong); //set the location for this title
+                        var marker = new google.maps.Marker({ //place the marker for this title
+                            position: ClassLoc,
+                            map: map
+                        });
     
-                var infowindow = new google.maps.InfoWindow(); //create a new infowindow
-                    google.maps.event.addListener(marker,'click', (function(marker,contentString,infowindow){ //listener for the markers/infowindows
-                    return function() {
-                        infowindow.setContent(contentString);
-                        infowindow.open(map,marker);
-                    };
-                })(marker,contentString,infowindow)); 
-                ++i; //i is used to keep all the arrays in sync with the titles array
-            
-            });
+                        var infowindow = new google.maps.InfoWindow(); //create a new infowindow
+                        google.maps.event.addListener(marker,'click', (function(marker,contentString,infowindow){ //listener for the markers/infowindows
+                            return function() {
+                                infowindow.setContent(contentString);
+                                infowindow.open(map,marker);
+                            };
+                        })(marker,contentString,infowindow)); 
+                    
+                });
         
+            });
             mapRefreshed = false; //resets the tracker for searches to allow for multiple searches on the map
         }
     
@@ -95,48 +85,8 @@
     
     searchBox.onsubmit = function(search){
         search.preventDefault(); //prevent normal HTML form submit
-        results=[]; //array to hold the snapshot from firebase
-        var i = 0,temp = "";
-    
-        classRef.orderByChild("ClassTitle").on("value", function(snap){ //pull a snapshot of the database from firebase
-            snap.forEach(function(item){
-                results.push(item.val()); //push each JSON object to results
-            });
-        
-        });
-    
-        //reset all temporary storage arrays
-        titles = [];
-        instructors = [];
-        descriptions = [];
-        emails = [];
-        facebooks = [];
-        twitters = [];
-        phones = [];
-        websites = [];
-        loclat = [];
-        loclong = [];
-     
-        var searchString = $("#search").val(); //pulls search term from the HTML page
-        results.forEach(function(item){ 
-            if(item.ClassTitle.toLowerCase() === searchString.toLowerCase()){ 
-            //loop through the snap shot and pull the correct objects into the corresponding arrays
-                titles.push(item.ClassTitle);
-                instructors.push(item.ClassInstructor);
-                descriptions.push(item.ClassDescription);
-                emails.push(item.Email);
-                facebooks.push(item.Facebook);
-                twitters.push(item.Twitter);
-                phones.push(item.Phone);
-                websites.push(item.Website);
-                loclat.push(item.LocationLat);
-                loclong.push(item.LocationLong);
-            };
-        });
         mapRefreshed = true; //set search tracking variable to true to indicate a search has happened
         initialise(); //refresh map to place markers
-    
-    
     }
 </script>
 </html>
