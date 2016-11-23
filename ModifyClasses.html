@@ -1,0 +1,59 @@
+<DOCTYPE! HTML>
+<HTML>
+	<head>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	</head>
+	<body>
+		<p id = "i"></p>
+
+	<!-- Script for connecting Database-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+	</script>
+	<!-- load jquery -->
+	<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+	<!-- load firebase library -->
+	<script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g",
+	    authDomain: "bexel-ed8b3.firebaseapp.com",
+	    databaseURL: "https://bexel-ed8b3.firebaseio.com",
+	    storageBucket: "bexel-ed8b3.appspot.com",
+	    messagingSenderId: "325793789014"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+
+	<!-- Script for Accessing Database-->
+	<script>
+		
+		var database = firebase.database();
+		var rootRef = firebase.database().ref().child("Class");
+		var ClassInstructor;
+		var ClassTitle;
+		var Description;
+		var Email;
+		var Facebook;
+		var Location;
+		var Phone;
+		var Twitter;
+		var Website;
+		rootRef.once('value', function(snap){
+			
+			ClassInstructor = snap.child("ClassInstructor").val();
+			ClassTitle = snap.child("ClassTitle").val();
+			Description = snap.child("Description").val();
+			Email = snap.child("Email").val();
+			Facebook = snap.child("Facebook").val();
+			Location = snap.child("Location").val();
+			Phone = snap.child("Phone").val();
+			Twitter = snap.child("Twitter").val();
+			Website = snap.child("Website").val();			
+		});
+		
+		alert(ClassTitle);
+	
+	</script>
+	</body>
+</HTML>
