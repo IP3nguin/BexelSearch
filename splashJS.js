@@ -1,4 +1,4 @@
-var newAccount = false;
+
 function signUp() { //this function handles the sign up with the auth server as well as error handling and detail insertion
     var email = document.getElementById('suemail').value;
     var password = document.getElementById('supassword').value;
@@ -16,7 +16,7 @@ function signUp() { //this function handles the sign up with the auth server as 
         alert('Please enter a longer password.');
         return;
     }
-	newAccount = true;
+	
     firebase.auth().createUserWithEmailAndPassword(email, password).then(function(uId){	
 	var uId = firebase.auth().currentUser.uid;
 	saveDetails(userName, firstName, lastName, email, uId);
@@ -38,7 +38,11 @@ function logIn() { //this function handles login and error handling
     var email = document.getElementById('logEmail').value;
     var password = document.getElementById('logPass').value; //declare and pull data from html form.
 
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) { //actual firebase function for sign in, handles errors as well
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function(user){
+	
+	window.location = "/home/u170158/CS353/Bexel/homePage.html";
+	
+	}).catch(function (error) { //actual firebase function for sign in, handles errors as well
         var errorCode = error.code;
         var errorMessage = error.message;
 
@@ -48,16 +52,11 @@ function logIn() { //this function handles login and error handling
             alert(errorMessage);
         }
         console.log(error); //log the errors for debugging dont know how to view though :P
-    }).then(function(user){
-	
-	window.location = "/home/u170158/CS353/Bexel/homePage.html";
-	
-	});
+    });
 }
 
 function saveDetails(user, first, last, email, uId) { //takes the user detaisl as input then puts them into the "users" object in the database
     var database = firebase.database();
-	console.log("HAIII, I'M RUNNING NOW!");
 
     firebase.database().ref('users/' + uId).set({ // creats new objects in the database with the name = their userid
         "username": user,
@@ -72,13 +71,17 @@ function saveDetails(user, first, last, email, uId) { //takes the user detaisl a
 
 }
 
-window.onload = function () { // load the function that moves you on when you are signed in
-    firebase.auth().onAuthStateChanged(function (user, newAccount) { // listen for login status 
-        if (user && !newAccount) { //if logged in, move user to the homepage
-           	window.location = '/home/u170158/CS353/Bexel/homePage.html'; //please change this to location of our home page
-        }
+$(document).ready(function() { // load the function that moves you on when you are signed in
+	var user;
+	var unsub = firebase.auth().onAuthStateChanged(function(user){
+		user = firebase.auth().currentUser;
+	 	if (user) { //if logged in, move user to the homepage
+		   	window.location = '/home/u170158/CS353/Bexel/homePage.html'; //please change 			this to location of our home page
+		}
+	unsub();
+	});
 	
-    });
-}
+
+});
 
 
