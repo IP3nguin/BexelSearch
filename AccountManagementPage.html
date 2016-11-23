@@ -3,16 +3,17 @@
 
     <head>
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
     </head>
     <body>
     <h3>Account Management</h3>
 	<div id = "updateInfoDiv">
 		<label class = "labelSetChangeDetails">Change Details Here!</label><br>
-		<label class = "labelSetChangeDetails">First Name: </label><br>
-		<label class = "labelSetChangeDetails">Last Name: </label><br>
-		<label class = "labelSetChangeDetails">E-mail: </label><br>
-		<label class = "labelSetChangeDetails">Username: </label><br>
-		<label class = "labelSetChangeDetails">Password: </label><br>
+		<label class = "labelSetChangeDetails" id = "firstNameRef">First Name: </label><br>
+		<label class = "labelSetChangeDetails" id = "lastNameRef">Last Name: </label><br>
+		<label class = "labelSetChangeDetails" id = "emailRef">E-mail: </label><br>
+		<label class = "labelSetChangeDetails" id = "usernameRef">Username: </label><br>
+		<label class = "labelSetChangeDetails" id = "passwordRef">Password: </label><br>
 		<button type = "button" id = "changeDetailsBtn">Change Details</button>
 		<br><br><br>
 	</div>
@@ -40,6 +41,8 @@
 		<a href = https://www.bexelsearch.tk/ModifyClasses.html>Delete A Class!</a>
 
 	</div>
+
+<!-- Script for Hiding and shoung Divs-->
 <script>
 	$( "#changeDetailsBtn" ).click(function() {
 	  	$( "#changeDetailsFormDiv" ).slideToggle( "slow", function() {
