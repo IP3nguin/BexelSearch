@@ -3,88 +3,56 @@
 
     <head>
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
     </head>
-
     <body>
-
-        <h3>Account Management</h3>
-        <div id="updateInfoDiv">
-            <label class="labelSetUpdateButtons">E-mail Address: (Current Email here)</label>
-            <button type="button" id="changeEmailBut">change email</button>
-            <br><br><br>
-            <label class="labelSetUpdateButtons">Username: (Current Username here)</label>
-            <button type="button" id="changeUsernameBut">change username</button>
-            <br><br><br>
-            <label class="labelSetUpdateButtons">Password: (Current Password here)</label>
-            <button type="button" id="changePasswordBut">change password</button>
-            <br><br><br>
-
-            <br>
-            <div id="changeEmailFormDiv">
-                <h4>E-mail Form</h4>
-                <form>
-                    <label class="labelSetUpdateForms">Current E-mail: (Current E-mail here)</label> <br>
-                    <label class="labelSetUpdateForms">New Username: </label> <input type="text" id="newEmail"><br>
-                    <input type="submit" value="Change E-mail">
-                </form>
-            </div>
-            <div id="changeUsernameFormDiv">
-                <h4>Username Form</h4>
-                <form>
-                    <label class="labelSetUpdateForms">Current Username: (Current Username here)</label> <br>
-                    <label class="labelSetUpdateForms">New Username: </label> <input type="text" id="newUsername"><br>
-                    <input type="submit" value="Change Username">
-                </form>
-            </div>
-            <div id="changePasswordFormDiv">
-                <h4>Password Form</h4>
-                <form>
-                    <label class="labelSetUpdateForms">Current Password: <input type = "password" id = "currentPassword"><br>
-				<label class = "labelSetUpdateForms">New Password: <input type = "password" id = "newPassword"><br>
-				<input type = "submit" value = "Change Password">
+    <h3>Account Management</h3>
+	<div id = "updateInfoDiv">
+		<label class = "labelSetChangeDetails">Change Details Here!</label><br>
+		<label class = "labelSetChangeDetails" id = "firstNameRef">First Name: </label><br>
+		<label class = "labelSetChangeDetails" id = "lastNameRef">Last Name: </label><br>
+		<label class = "labelSetChangeDetails" id = "emailRef">E-mail: </label><br>
+		<label class = "labelSetChangeDetails" id = "usernameRef">Username: </label><br>
+		<label class = "labelSetChangeDetails" id = "passwordRef">Password: </label><br>
+		<button type = "button" id = "changeDetailsBtn">Change Details</button>
+		<br><br><br>
+	</div>
+	<div id = "changeDetailsFormDiv">
+		<h4>Details Form</h4>
+		<form>
+			<label class="labelSetUpdateForms">First Name: </label><input type="text" placeholder="Current First Name" id = "newFistName"><br>
+			<label class="labelSetUpdateForms">Last Name: </label><input type="text" placeholder="Current Last Name" id = "newLastName"><br>
+			<label class="labelSetUpdateForms">E-mail: </label><input type="text" placeholder="Current E-mail Address" id = "newEmail"><br>
+			<label class = "labelSetUpdateForms">Username: </label><input type="text" placeholder="Current Username" id = "newUsername"><br>
+			<label class = "labelSetUpdateForms">Password: <input type="password" placeholder="Current Password" id = "newPassword"><br>
+			<input type = "submit" value = "Change Details">
 			</form>
 		</div>
-	</div>
+		</div>
+		
+	
 	<div id = "updateClasses">
-		<a href = https://www.bexelsearch.blah/Register_Class.html>Create A New Class!</a>
+		<a href = https://www.bexelsearch.tk/Register_Class.html>Create A New Class!</a>
 		<br>
 		<br>
-		<a href = https://www.bexelsearch.blah/ModifyClasses.html>Change A Class!</a>
+		<a href = https://www.bexelsearch.tk/ModifyClasses.html>Change A Class!</a>
 		<br>
 		<br>
-		<a href = https://www.bexelsearch.blah/ModifyClasses.html>Delete A Class!</a>
+		<a href = https://www.bexelsearch.tk/ModifyClasses.html>Delete A Class!</a>
 
 	</div>
+
+<!-- Script for Hiding and shoung Divs-->
 <script>
-	$( "#changeEmailBut" ).click(function() {
-		$("#changeUsernameFormDiv").hide()
-		$("#changePasswordFormDiv").hide()
-	  	$( "#changeEmailFormDiv" ).slideToggle( "slow", function() {
+	$( "#changeDetailsBtn" ).click(function() {
+	  	$( "#changeDetailsFormDiv" ).slideToggle( "slow", function() {
 	  	});
 	});
 	
-	$( "#changeUsernameBut" ).click(function() {
-		$("#changeEmailFormDiv").hide()
-		$("#changePasswordFormDiv").hide()
-	  	$( "#changeUsernameFormDiv" ).slideToggle( "slow", function() {
-	  	});
-	});
-	
-	$( "#changePasswordBut" ).click(function() {
-		$("#changeEmailFormDiv").hide()
-		$("#changeUsernameFormDiv").hide()
-	  	$( "#changePasswordFormDiv" ).slideToggle( "slow", function() {
-	  	});
-	});
 
 	$(document).ready(function() {
-		$("#changeEmailFormDiv").hide();
+		$("#changeDetailsFormDiv").hide();
 	});
-	$(document).ready(function() {
-		$("#changeUsernameFormDiv").hide();
-	});	
-	$(document).ready(function() {
-		$("#changePasswordFormDiv").hide();
-	});
+
 </script>
 </body>
