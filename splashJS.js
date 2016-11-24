@@ -1,5 +1,9 @@
-var newAcc = 0;
-var email, password, userName, firstName, lastName;
+function signUp() { //this function handles the sign up with the auth server as well as error handling and detail insertion
+    var email = document.getElementById('suemail').value;
+    var password = document.getElementById('supassword').value;
+    var userName = document.getElementById('suusername').value;
+    var firstName = document.getElementById('sufirstname').value;
+    var lastName = document.getElementById('sulastname').value; //declare and pull data from html form
 
 function signUp() { //this function handles the sign up with the auth server as well as error handling and detail insertion
     email = document.getElementById('suemail').value;
@@ -17,17 +21,20 @@ function signUp() { //this function handles the sign up with the auth server as 
         alert('Please enter a longer password.');
         return;
     }
-
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) { // actual firebase fucntion to create the user, along with firebase error handling
+	
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function(uId){	
+	var uId = firebase.auth().currentUser.uid;
+	saveDetails(userName, firstName, lastName, email, uId);
+	
+	
+}).catch(function (error) { // actual firebase fucntion to create the user, along with firebase error handling
         var errorCode = error.code;
         var errorMessage = error.message;
 
         alert(errorMessage);
-        console.log(error);
+        console.log(error);	
     });
-
-    //saveDetails(userName, firstName, lastName, email); // call the function to insert user details to database, currently has timing errors
-
+    
 }
 
 function logIn() { //this function handles login and error handling
@@ -35,8 +42,11 @@ function logIn() { //this function handles login and error handling
     var email = document.getElementById('logEmail').value;
     var password = document.getElementById('logPass').value; //declare and pull data from html form.
 
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) { //actual firebase function for sign in, handles errors as well
-
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function(user){
+	
+	window.location = "/home/u170158/CS353/Bexel/homePage.html";
+	
+	}).catch(function (error) { //actual firebase function for sign in, handles errors as well
         var errorCode = error.code;
         var errorMessage = error.message;
 
@@ -45,8 +55,8 @@ function logIn() { //this function handles login and error handling
         } else {
             alert(errorMessage);
         }
-        console.log(error); //log the errors for debugging
 
+        console.log(error); //log the errors for debugging dont know how to view though :P
     });
 }
 
@@ -58,33 +68,25 @@ function saveDetails(user, first, last, email, uId) { //takes the user detaisl a
         "firstName": first,
         "lastName": last,
         "email": email
-    });
+    }).then(function(user){
+	
+	window.location = "/home/u170158/CS353/Bexel/homePage.html";
+	
+	});
 
     document.write('<button type="button" id="SignUpBut" onclick="redirect()">Sign up sucessful!</button>');
 
 
 }
+$(document).ready(function() { // load the function that moves you on when you are signed in
+	var user;
+	var unsub = firebase.auth().onAuthStateChanged(function(user){
+		user = firebase.auth().currentUser;
+	 	if (user) { //if logged in, move user to the homepage
+		   	window.location = '/home/u170158/CS353/Bexel/homePage.html'; //please change 			this to location of our home page
+		}
+	unsub();
+	});
+	
 
-
-
-
-function watchLogin() {
-
-    firebase.auth().onAuthStateChanged(function (user) {
-        if ((user) && (newAcc == 1)) {
-            var uId = firebase.auth().currentUser.uid;
-            saveDetails(userName, firstName, lastName, email, uId);
-
-        } else if (user) {
-            window.location = 'homePage.html';
-        }
-    });
-}
-
-window.onload = function () {
-    watchLogin();
-}
-
-function redirect() {
-    window.location = 'homePage.html';
-}
+});
