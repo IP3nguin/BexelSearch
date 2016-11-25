@@ -103,6 +103,20 @@ var marker;
 
 
 </script>
+     <script type="text/javascript">
+            window.onload = function() {
+
+            function watchLogin() {
+
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (!user) {
+                        window.location = '/index';
+                    }
+                });
+            }
+            }
+
+        </script>
 
 
 
