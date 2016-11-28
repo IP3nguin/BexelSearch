@@ -22,7 +22,7 @@
     <h1>Search</h1>
 </head>
 
-<body onload="initialise()">
+<body>
 
     <form id="searchBox">
         <input type="text" id="search" name="search" placeholder="Search..">
@@ -95,7 +95,8 @@
     
  <script type="text/javascript">
             window.onload = function() {
-
+                
+            initialise();
             function watchLogin() {
 
                 firebase.auth().onAuthStateChanged(function(user) {
