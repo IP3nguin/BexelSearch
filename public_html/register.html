@@ -5,6 +5,20 @@
 	
 	<meta charset="utf-8">
  	<meta name="viewport" content="width=device-width, initial-scale=1">
+     <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+    <!-- load firebase library -->
+       <script>
+        // initialise firebase
+        var config = {
+            apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g",
+            authDomain: "bexel-ed8b3.firebaseapp.com",
+            databaseURL: "https://bexel-ed8b3.firebaseio.com",
+            storageBucket: "bexel-ed8b3.appspot.com",
+            messagingSenderId: "325793789014"
+        };
+        firebase.initializeApp(config);
+
+    </script>
     
 	<!--test compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -54,14 +68,14 @@
 </body>
 
 <script>
-var map;
+var map,chromeLat,chromeLon;
 var Latlng = new google.maps.LatLng(53.38914, -6.600050); //Default Location
 var clickLat;
 var clickLon;
 var marker;
 
 
- function initialize() {
+ function initialise() {
 
      var mapOptions = {
          zoom: 13,
@@ -70,11 +84,30 @@ var marker;
      };
      var map = new google.maps.Map(document.getElementById('map'), mapOptions); //Create new map
 
-     if (navigator.geolocation) {
-         navigator.geolocation.getCurrentPosition(function (position) {
-             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //Get User location using GeoLocation API
-             map.setCenter(initialLocation); // Refresh map to centre on user location
-         });
+     var isChromium = window.chrome,
+            winNav = window.navigator,
+            vendorName = winNav.vendor,
+            isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+            isOpera = winNav.userAgent.indexOf("OPR") > -1,
+            isIOSChrome = winNav.userAgent.match("CriOS");
+        
+        if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isIEedge == false){
+            if(confirm("Would you like to share your location with this site?")){
+                $.getJSON("http://ip-api.com/json", function(json) {
+                    chromeLat = json.lat;
+                    chromeLon = json.lon;
+                    initialLocation = new google.maps.LatLng(chromeLat,chromeLon);
+                    map.setCenter(initialLocation);
+                });
+            }
+            else{ alert("Some functionalities may not function properly without your location. To continue, refresh this page and accept location services");}
+        }
+        else if (navigator.geolocation) { //if location allowed
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //Get User location using GeoLocation API
+                    map.setCenter(initialLocation); // Refresh map to centre on user location
+                    });
+        }
 		  		 
 		 google.maps.event.addListener(map, 'click', function(event) {
 			placeMarker(event.latLng);
@@ -96,26 +129,30 @@ var marker;
 			}
 		}
      }
- }
- initialize();
+ initialise();
 //TODO add database submit query
 
 
 
 </script>
      <script type="text/javascript">
-            window.onload = function() {
+            $(document).ready(function () { // load the function that moves you on if you already signed in.
+              var user;
+              var unsub = firebase.auth().onAuthStateChanged(function (user) { // create a listener to waits for firebase initialisation before attempting to get currentUser. 
+                  user = firebase.auth().currentUser;
+                  if (user) { //if logged in, move user to the homepage
+                      initialise();
+                  }
+                  else{
+                      window.location = 'index';
+                  }
+            unsub(); //unsub() here is used to listen on pageload for a user if one is found then move on, if not then stop listening as the return value of unsub() is the function to kill the listener.
+        //This is needed as the database connection becomes erratic for other function while listener is active.
+    });
 
-            
-            function watchLogin() {
 
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (!user) {
-                        window.location = '/index';
-                    }
-                });
-            }
-            }
+});
+
 
         </script>
 

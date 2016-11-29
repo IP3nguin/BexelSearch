@@ -28,14 +28,14 @@
         <input type="text" id="search" name="search" placeholder="Search..">
     </form>
 
-    <div  onload="initialise()" id="map" style="width: 100%; height: 500px;"></div>
+    <div id="map" style="width: 100%; height: 500px;"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g" type="text/javascript"></script>
 
 </body>
 
 
 <script>
-    var map,chromeLat,chromeLon;
+    var map,chromeLat,chromeLon,locEnable;
     var Latlng = new google.maps.LatLng(70.38914, -6.600050); //Default Location
     var classRef = firebase.database().ref('classes');
     var mapRefreshed = false;
@@ -56,7 +56,10 @@
             isIOSChrome = winNav.userAgent.match("CriOS");
         
         if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isIEedge == false){
-            if(confirm("Would you like to share your location with this site?")){
+            if(!mapRefreshed){
+                locEnable = confirm("Would you like to share your location with this site?");
+            }
+            if(locEnable){
                 $.getJSON("http://ip-api.com/json", function(json) {
                     chromeLat = json.lat;
                     chromeLon = json.lon;
@@ -114,18 +117,22 @@
 </script>
     
  <script type="text/javascript">
-            window.onload = function() {
-                
-            initialise();
-            function watchLogin() {
+          $(document).ready(function () { // load the function that moves you on if you already signed in.
+              var user;
+              var unsub = firebase.auth().onAuthStateChanged(function (user) { // create a listener to waits for firebase initialisation before attempting to get currentUser. 
+                  user = firebase.auth().currentUser;
+                  if (user) { //if logged in, move user to the homepage
+                      initialise();
+                  }
+                  else{
+                      window.location = 'index';
+                  }
+            unsub(); //unsub() here is used to listen on pageload for a user if one is found then move on, if not then stop listening as the return value of unsub() is the function to kill the listener.
+        //This is needed as the database connection becomes erratic for other function while listener is active.
+    });
 
-                firebase.auth().onAuthStateChanged(function(user) {
-                    if (!user) {
-                        window.location = '/index';
-                    }
-                });
-            }
-            }
+
+});
 
         </script>
 
