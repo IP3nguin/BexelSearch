@@ -35,7 +35,7 @@
 
 
 <script>
-    var map;
+    var map,chromeLat,chromeLon;
     var Latlng = new google.maps.LatLng(70.38914, -6.600050); //Default Location
     var classRef = firebase.database().ref('classes');
     var mapRefreshed = false;
@@ -48,12 +48,32 @@
         };
         var map = new google.maps.Map(document.getElementById('map'), mapOptions); //Create new map
 
-        if (navigator.geolocation) { //if location allowed
-            navigator.geolocation.getCurrentPosition(function(position) {
-                initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //Get User location using GeoLocation API
-                map.setCenter(initialLocation); // Refresh map to centre on user location
-            });
+        var isChromium = window.chrome,
+            winNav = window.navigator,
+            vendorName = winNav.vendor,
+            isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+            isOpera = winNav.userAgent.indexOf("OPR") > -1,
+            isIOSChrome = winNav.userAgent.match("CriOS");
+        
+        if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isIEedge == false){
+            if(confirm("Would you like to share your location with this site?")){
+                $.getJSON("http://ip-api.com/json", function(json) {
+                    chromeLat = json.lat;
+                    chromeLon = json.lon;
+                    initialLocation = new google.maps.LatLng(chromeLat,chromeLon);
+                    map.setCenter(initialLocation);
+                });
+            }
+            else{ alert("Some functionalities may not function properly without your location. To continue, refresh this page and accept location services");}
         }
+        else if (navigator.geolocation) { //if location allowed
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //Get User location using GeoLocation API
+                    map.setCenter(initialLocation); // Refresh map to centre on user location
+                    });
+            
+        }
+        
         if (mapRefreshed) { //if the user has searched for something
 
             var searchString = $("#search").val(); //pulls search term from the HTML page
