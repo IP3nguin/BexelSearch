@@ -5,24 +5,69 @@
 		<title> Testing... </title>
 		<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
 		<script src="connectToFirebase.js"></script>
+		<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	</head>
 	<body>
+			
+		<script>
+			function submitForm() {
+				var title = document.getElementById("title").value;
+				var desc = document.getElementById("desc").value;
+				var instr =	document.getElementById("instr").value;
+				var phone =	document.getElementById("phone").value; 
+				var email =	document.getElementById("email").value;
+				var web = document.getElementById("web").value;
+				var face = document.getElementById("face").value;
+				var tweet = document.getElementById("tweet").value;
+				var location = "Default location";
+				
+				var newClass = addNewClass(instr, title, desc, email, face, location, phone, tweet, web);				
+				
+				return false;
+			}
 		
-		
-		
-		
-		<form>
-			<!--
-    		<input type="text" id="title" name="title" />
-    		-->
-    		<input type="button" value="Print" onClick="print();"/>
-		</form>
-		
+		</script>		
+		<form class = "form-horizontal" onsubmit="return submitForm();">
+		<div class="col-sm-offset-2 col-sm-10">
+			<h3> Register a new class </h3></br></br>
+		</div>	
+		<div class = "form-group">
+			<label class = "control-label col-sm-2" for= "title">Class Title:</label>
+				<input id ="title" type = "text" name="title" class="inputForm"></br>
+			<label class = "control-label col-sm-2" for= "desc">Description:</label>
+				<input id = "desc" type = "text" name="desc"></br>
+			<label class = "control-label col-sm-2" for= "title">Location:</label>
+				<div id="map" style="width: 500px; height: 400px;"></div>
+
+			<label class = "control-label col-sm-2" for= "instr">Class Instructor:</label>
+				<input id = "instr" type = "text" name="instr"></br>
+			<label class = "control-label col-sm-2" for= "phone">Phone:</label>
+				<input id = "phone" type = "text" name="phone"></br>
+			<label class = "control-label col-sm-2" for= "email">Email:</label>
+				<input id = "email" type = "text" name="email"></br>
+			<label class = "control-label col-sm-2" for= "web">Website:</label>
+				<input id = "web" type = "text" name="web"></br>
+			<label class = "control-label col-sm-2" for= "face">Facebook:</label>
+				<input id = "face" type = "text" name="face"></br>
+			<label class = "control-label col-sm-2" for= "tweet">Twitter:</label>
+				<input id = "tweet" type = "text" name="tweet"></br></br>
+			<div class="col-sm-offset-2 col-sm-10">
+      				<button type="submit" class="btn btn-default">Submit</button>
+  			</div>
+		</div>
+	</form>
+	
 		<pre id="JSONout">
 			The classes JSON object from the database will be printed here
 		</pre>
 		
+		
 		<script src="app.js"></script>
+		<script>
+	
+			//deleteClass("-KXE4m2J5coD76p0DnSE");
+		</script>
 		
 	</body>
 </html>
