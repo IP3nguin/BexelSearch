@@ -47,7 +47,7 @@ function logIn() { //this function handles login and error handling
 
     firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) { // firebase function for sign in, includes error handling.
         //Also, had attacted .then() to ensure correct asynchronous execution of signIn and redirect.
-        window.location = "Home";
+        window.location = "home";
 
     }).catch(function (error) {
         var errorCode = error.code;
@@ -73,7 +73,7 @@ function saveDetails(user, first, last, email, uId) { //takes the user detaisl a
         "email": email
     }).then(function (user) {
 
-        window.location = "Home"; // after insertion completion is ensured by callback .then() , move the user to the homepage. 
+        window.location = "home"; // after insertion completion is ensured by callback .then() , move the user to the homepage. 
 
     });
 
