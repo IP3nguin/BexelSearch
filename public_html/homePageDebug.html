@@ -15,7 +15,7 @@
 
         <div class="buttons">
 
-            <button type="button" id="logout" onclick="firebase.auth().signOut()">Log Out</button>
+            <button type="button" id="logout" onclick="signOut()">Log Out</button>
         </div>
         <a href="sample2.html">load another page</a>
 
@@ -36,6 +36,11 @@
         </script>
 
         <script type="text/javascript">
+            function signOut(){
+                firebase.auth().signOut();
+                window.location = 'index';
+            }
+            
             $(document).ready(function () { // load the function that moves you on if you already signed in.
               var user;
               var unsub = firebase.auth().onAuthStateChanged(function (user) { // create a listener to waits for firebase initialisation before attempting to get currentUser. 
