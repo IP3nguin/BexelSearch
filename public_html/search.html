@@ -51,9 +51,7 @@
         var isChromium = window.chrome,
             winNav = window.navigator,
             vendorName = winNav.vendor,
-            isIEedge = winNav.userAgent.indexOf("Edge") > -1,
-            isOpera = winNav.userAgent.indexOf("OPR") > -1,
-            isIOSChrome = winNav.userAgent.match("CriOS");
+            isIEedge = winNav.userAgent.indexOf("Edge") > -1;
         
         if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isIEedge == false){
             if(!mapRefreshed){
