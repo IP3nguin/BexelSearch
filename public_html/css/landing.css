@@ -2,7 +2,7 @@
 /* I will never be able to explain this, its CSS. Oh and if you are wondering about the -webkit- , -moz- etc. its the vendor prefixes for non-standard css properties, so it works on other browsers. */
 
 body {
-    /* padding-top: 90px; */
+    padding-top: 30px;
     background-color: transparent;
     overflow: hidden;
 }
@@ -31,6 +31,7 @@ body {
 }
 
 .panel-login {
+    padding-top: 30px;
     border-color: #ccc;
     -webkit-box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
