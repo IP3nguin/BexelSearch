@@ -4,7 +4,6 @@
 body {
     padding-top: 30px;
     background-color: transparent;
-    overflow: hidden;
 }
 
 .back {
@@ -28,6 +27,7 @@ body {
     -moz-transform: scale(1.05);
     -o-transform: scale(1.05);
     -ms-transform: scale(1.05);
+    overflow: hidden;
 }
 
 .panel-login {
