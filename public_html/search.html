@@ -2,18 +2,73 @@
 <html>
 
 <head>
-     <!-- Icon selection code -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-        <link rel="manifest" href="/manifest.json">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f69005">
-        <meta name="theme-color" content="#fca631">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
+   <!--test compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/search.css">
+
+    
+     <!-- Icon selection code -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f69005">
+    <meta name="theme-color" content="#fca631">
+
+</head>
+
+<body>
+    <title>Search!</title>
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+            </button>
+            <a class="navbar-brand" href="#">Bexel</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/home.html">Home</a></li>
+                <li class="dropdown">
+                <li><a href ="/myAccount.html">Account</a></li>
+                <li><a href="#">Page 2</a></li>
+                <li><a href="#">Page 3</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    
+    <div class = "row">
+        <div class = "container">
+            <div class = "jumbotron jumbocontent">
+                 <div class = "title">
+                         <h2>Search</h2>
+                </div>
+
+                <form id="searchBox">
+                    <div class = "form-group">
+                        <input class = "form-control col-xs-10" type="text" id="search" name="search" placeholder="Search..">
+                        <br><br>
+                    </div>
+                </form>
+                <div id="map" class = "map"></div>
+            </div>  
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- load jquery -->
     <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
     <!-- load firebase library -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g" type="text/javascript"></script>
+    <!-- load maps api -->
+    
     <script>
         // initialise firebase
         var config = {
@@ -26,120 +81,7 @@
         firebase.initializeApp(config);
 
     </script>
-
-    <h1>Search</h1>
-</head>
-
-<body>
-
-    <form id="searchBox">
-        <input type="text" id="search" name="search" placeholder="Search..">
-    </form>
-
-    <div id="map" style="width: 100%; height: 500px;"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g" type="text/javascript"></script>
+    <script src = "/Js/search.js"></script>
 
 </body>
-
-
-<script>
-    var map,chromeLat,chromeLon,locEnable;
-    var Latlng = new google.maps.LatLng(70.38914, -6.600050); //Default Location
-    var classRef = firebase.database().ref('classes');
-    var mapRefreshed = false;
-
-    function initialise() {
-        var mapOptions = {
-            zoom: 11,
-            center: Latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions); //Create new map
-
-        var isChromium = window.chrome,
-            winNav = window.navigator,
-            vendorName = winNav.vendor,
-            isIEedge = winNav.userAgent.indexOf("Edge") > -1;
-        
-        if(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isIEedge == false){
-            if(!mapRefreshed){
-                locEnable = confirm("Would you like to share your location with this site?");
-            }
-            if(locEnable){
-                $.getJSON("http://ip-api.com/json", function(json) {
-                    chromeLat = json.lat;
-                    chromeLon = json.lon;
-                    initialLocation = new google.maps.LatLng(chromeLat,chromeLon);
-                    map.setCenter(initialLocation);
-                });
-            }
-            else{ alert("Some functionalities may not function properly without your location. To continue, refresh this page and accept location services");}
-        }
-        else if (navigator.geolocation) { //if location allowed
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); //Get User location using GeoLocation API
-                    map.setCenter(initialLocation); // Refresh map to centre on user location
-                    });
-            
-        }
-        
-        if (mapRefreshed) { //if the user has searched for something
-
-            var searchString = $("#search").val(); //pulls search term from the HTML page
-            classRef.orderByChild("ClassTitle").equalTo(searchString).on("value", function(snap) { //pull a snapshot of the database from firebase
-                snap.forEach(function(item) {
-                    var contentString = "<h2>" + item.val().ClassTitle + "</h2>\n" + item.val().ClassDescription + "\n<h4>Instructor: </h4>" + item.val().ClassInstructor + "\n<h4>Email:  </h4>" + item.val().Email + "\n<h4>Facebook: </h4>" + item.val().Facebook + "\n<h4>Twitter: </h4>" + item.val().Twitter + "\n<h4>Phone: </h4>" + item.val().Phone + "\n<h4>Website: </h4>" + item.val().Website; //set the content string for this title
-
-                    var ClassLoc = new google.maps.LatLng(item.val().LocationLat, item.val().LocationLong); //set the location for this title
-                    var marker = new google.maps.Marker({ //place the marker for this title
-                        position: ClassLoc,
-                        map: map
-                    });
-
-                    var infowindow = new google.maps.InfoWindow(); //create a new infowindow
-                    google.maps.event.addListener(marker, 'click', (function(marker, contentString, infowindow) { //listener for the markers/infowindows
-                        return function() {
-                            infowindow.setContent(contentString);
-                            infowindow.open(map, marker);
-                        };
-                    })(marker, contentString, infowindow));
-
-                });
-
-            });
-            mapRefreshed = false; //resets the tracker for searches to allow for multiple searches on the map
-        }
-
-    }
-
-    var searchBox = document.getElementById("searchBox"); //var to track the search bar
-
-    searchBox.onsubmit = function(search) {
-        search.preventDefault(); //prevent normal HTML form submit
-        mapRefreshed = true; //set search tracking variable to true to indicate a search has happened
-        initialise(); //refresh map to place markers
-    }
-
-</script>
-    
- <script type="text/javascript">
-          $(document).ready(function () { // load the function that moves you on if you already signed in.
-              var user;
-              var unsub = firebase.auth().onAuthStateChanged(function (user) { // create a listener to waits for firebase initialisation before attempting to get currentUser. 
-                  user = firebase.auth().currentUser;
-                  if (user) { //if logged in, move user to the homepage
-                      initialise();
-                  }
-                  else{
-                      window.location = 'index';
-                  }
-            unsub(); //unsub() here is used to listen on pageload for a user if one is found then move on, if not then stop listening as the return value of unsub() is the function to kill the listener.
-        //This is needed as the database connection becomes erratic for other function while listener is active.
-    });
-
-
-});
-
-        </script>
-
 </html>
