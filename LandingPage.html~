@@ -1,0 +1,98 @@
+<DOCTYPE! HTML>
+    <HTML>
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- load jquery -->
+        <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+        <!-- load firebase library -->
+        <script>
+            // initialise firebase
+            var config = {
+                apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g",
+                authDomain: "bexel-ed8b3.firebaseapp.com",
+                databaseURL: "https://bexel-ed8b3.firebaseio.com",
+                storageBucket: "bexel-ed8b3.appspot.com",
+                messagingSenderId: "325793789014"
+            };
+            firebase.initializeApp(config);
+
+        </script>
+        <script type="text/javascript" src="splashJS.js"></script>
+
+    </head>
+
+    <body onload = "checkLoggedIn()">
+
+        <h2>Welcome to The Landing Page!</h2>
+
+        <div class="buttons">
+
+            <button type="button" id="SignUpBut">Sign Up here!</button>
+            <button type="button" id="LogInBut">Log In Here!</button>
+
+        </div>
+
+        <br><br><br>
+
+        <div id="SignUpFormDiv" style="display:none;">
+
+            <h3>Register</h3>
+            <br>
+
+            <form id="SignUpForm" onsubmit="return false">
+
+                <label class="labelSetSignUp">First Name: </label> <input type="text" id="sufirstname"><br>
+                <label class="labelSetSignUp">Last Name: </label> <input type="text" id="sulastname"><br>
+                <label class="labelSetSignUp">Username: </label> <input type="text" id="suusername"><br>
+                <label class="labelSetSignUp">E-mail Address: </label> <input type="text" id="suemail"><br>
+                <label class="labelSetSignUp">Password: </label> <input type="password" id="supassword"><br>
+                <br>
+                <input type="submit" value="Sign Up!!" onclick="signUp()">
+
+            </form>
+        </div>
+
+        <br><br><br>
+
+        <div id="LogInFormDiv" style="display:none;">
+
+            <h3>Log In</h3>
+            <br>
+
+            <form id="LogInForm" onsubmit="return false">
+
+                <label class="labelSetLogIn">E-mail Address: </label> <input type="text" id="logEmail"><br>
+                <label class="labelSetLogIn">Password: </label> <input type="password" id="logPass"><br>
+                <br>
+                <input type="submit" value="Log In!!" onclick="logIn()">
+
+            </form>
+        </div>
+
+    </body>
+
+    <script>
+        //look at rewriting this, is not optimal, can see it load in.
+        $("#SignUpBut").click(function() {
+            $("#LogInFormDiv").hide()
+            $("#SignUpFormDiv").slideToggle("slow", function() {
+                // Animation complete.
+            });
+        });
+
+        $("#LogInBut").click(function() {
+            $("#SignUpFormDiv").hide()
+            $("#LogInFormDiv").slideToggle("slow", function() {
+                // Animation complete.
+            });
+        });
+
+        $(document).ready(function() {
+            $("#SignUpFormDiv").hide();
+            $("#LogInFormDiv").hide();
+        });
+
+    </script>
+
+    </HTML>
