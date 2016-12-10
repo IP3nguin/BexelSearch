@@ -1,4 +1,4 @@
- var map,chromeLat,chromeLon,locEnable;
+  var map,chromeLat,chromeLon,locEnable;
     var Latlng = new google.maps.LatLng(70.38914, -6.600050); //Default Location
     var classRef = firebase.database().ref('classes');
     var mapRefreshed = false;
