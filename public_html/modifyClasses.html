@@ -5,7 +5,6 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <!--test compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/nav.css">
@@ -21,15 +20,14 @@
         <script>
             // Initialize Firebase
             var config = {
-                apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g",
-                authDomain: "bexel-ed8b3.firebaseapp.com",
-                databaseURL: "https://bexel-ed8b3.firebaseio.com",
-                storageBucket: "bexel-ed8b3.appspot.com",
-                messagingSenderId: "325793789014"
+                apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g"
+                , authDomain: "bexel-ed8b3.firebaseapp.com"
+                , databaseURL: "https://bexel-ed8b3.firebaseio.com"
+                , storageBucket: "bexel-ed8b3.appspot.com"
+                , messagingSenderId: "325793789014"
             };
             firebase.initializeApp(config);
         </script>
-
         <!-- Script for connecting Database-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     </head>
@@ -38,12 +36,7 @@
         <nav class="navbar navbar-inverse navbar-static-top" style="background-color: #4a4a4a;">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                     <a href="/home" class="navbar-brand"><img src="/img/Bexel_NameOnly.png" height="30" width=""></a>
                 </div>
                 <div id="navbarCollapse" class="collapse navbar-collapse">
@@ -59,151 +52,147 @@
                 </div>
             </div>
         </nav>
-	<div id = "mainContaianer">
-		<h3>Your Classes</h3>
-		<div id="list">
-		    sample text
-		   
-		</div>
-		<div id = "classFormDiv" style = "display: none">
-			<form id = "classForm" onsubmit = "writeNewPost();">
-				<label class="control-label" for="title">Class Title:</label>
-		                <input class="form-control col-xs-10" id="title" type="text" name="title"><br>
-		                <label class="control-label" for="desc">Description:</label>
-		                <input class="form-control col-xs-10" id="desc" type="text" name="desc"><br>
-		                <label class="control-label" for="instr">Class Instructor:</label>
-		                <input class="form-control col-xs-10" id="instr" type="text" name="instr"><br>
-		                <label class="control-label" for="phone">Phone:</label>
-		                <input class="form-control col-xs-10" id="phone" type="text" name="phone"><br>
-		                <label class="control-label" for="email">Email:</label>
-		                <input class="form-control col-xs-10" id="email" type="text" name="email"><br>
-		                <label class="control-label" for="web">Website:</label>
-		                <input class="form-control col-xs-10" id="web" type="text" name="web"><br>
-		                <label class="control-label" for="face">Facebook:</label>
-		                <input class="form-control col-xs-10" id="face" type="text" name="face"><br>
-		                <label class="control-label" for="tweet">Twitter:</label>
-		                <input class="form-control col-xs-10" id="tweet" type="text" name="tweet"><br>
-				<button type="submit" class="btn-lg btn-primary">Submit</button>
-			</form>
-		</div>
-	</div>
-
+        <div id="mainContaianer">
+            <h3>Your Classes</h3>
+            <div id="list"> sample text </div>
+            <div id="classFormDiv" style="display: none">
+                <form id="classForm" onsubmit="writeNewPost();">
+                    <label class="control-label" for="title">Class Title:</label>
+                    <input class="form-control col-xs-10" id="title" type="text" name="title">
+                    <br>
+                    <label class="control-label" for="desc">Description:</label>
+                    <input class="form-control col-xs-10" id="desc" type="text" name="desc">
+                    <br>
+                    <label class="control-label" for="instr">Class Instructor:</label>
+                    <input class="form-control col-xs-10" id="instr" type="text" name="instr">
+                    <br>
+                    <label class="control-label" for="phone">Phone:</label>
+                    <input class="form-control col-xs-10" id="phone" type="text" name="phone">
+                    <br>
+                    <label class="control-label" for="email">Email:</label>
+                    <input class="form-control col-xs-10" id="email" type="text" name="email">
+                    <br>
+                    <label class="control-label" for="web">Website:</label>
+                    <input class="form-control col-xs-10" id="web" type="text" name="web">
+                    <br>
+                    <label class="control-label" for="face">Facebook:</label>
+                    <input class="form-control col-xs-10" id="face" type="text" name="face">
+                    <br>
+                    <label class="control-label" for="tweet">Twitter:</label>
+                    <input class="form-control col-xs-10" id="tweet" type="text" name="tweet">
+                    <br>
+                    <button type="submit" class="btn-lg btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
         <!-- Script for redirecting-->
         <script>
-	var user, ct, cd, ci, ph, fb, tw, em, ws;
+            var user, ct, cd, ci, ph, fb, tw, em, ws;
             $(document).ready(function () { // load the function that moves you on if you already signed in.
                 var contentString;
                 var unsub = firebase.auth().onAuthStateChanged(function (user) { // create a listener to waits for firebase initialisation before attempting to get currentUser. 
                     user = firebase.auth().currentUser;
-
                     if (!user) { //if not logged in, move user to the index page
                         window.location = 'index';
                     }
                     var databaseRef = firebase.database().ref('classes/' + user.uid).orderByKey();
-         	    
                     databaseRef.on("value", function (snap) {
-				
                         snap.forEach(function (item) {
-			    var classid = item.key;
-			    var ul = document.getElementById("classes");
-			    var a = document.createElement("a");
-			    var t = document.createTextNode(databaseRef.OrderByChild(classid).ClassTitle.val());
-			    a.appendChild(t);
-			    a.id = classid;
-			    a.href = "javascript:showForm(" + a.id + ");";
-			    console.log(a.id);
-			    document.getElementById("list").appendChild(a);
-
+                            var classid = item.key;
+                            var classtitle = item.val().ClassTitle;
+                            var ul = document.getElementById("classes");
+                            var a = document.createElement("a");
+                            var t = document.createTextNode(classtitle);
+                            a.appendChild(t);
+                            a.id = classid;
+                            a.href = "javascript:showForm(" + a.id + ");";
+                            console.log(a.id);
+                            document.getElementById("list").appendChild(a);
                         });
-			
                     });
                     unsub(); //unsub() here is used to listen on pageload for a user if one is found then move on, if not then stop listening as the return value of unsub() is the function to kill the listener.
                     //This is needed as the database connection becomes erratic for other function while listener is active.
                 });
             });
-        
-		function showForm(classx){
-			gclassx= classx.id;
-			document.getElementById("classFormDiv").style.display = "block";
-			user = firebase.auth().currentUser;
-			var databaseRef2 = firebase.database().ref('classes/' + user.uid + "/" + classx.id);
-			databaseRef2.on("value", function(snap){
-				snap.forEach(function(item){
-					ct = snap.val().ClassTitle;
-					cd = snap.val().ClassDescription;
-					ci = snap.val().ClassInstructor;
-					ph = snap.val().Phone;
-					fb = snap.val().Facebook;
-					tw = snap.val().Twitter;
-					em = snap.val().Email;
-					ws = snap.val().Website;
-					
-					document.getElementById("title").placeholder = ct;
-					document.getElementById("desc").placeholder = cd;
-					document.getElementById("instr").placeholder = ci;
-					document.getElementById("phone").placeholder = ph;
-					document.getElementById("face").placeholder = fb;
-					document.getElementById("tweet").placeholder = tw;
-					document.getElementById("email").placeholder = em;
-					document.getElementById("web").placeholder = ws;
-					
-				});	
-			});
-		}
-		function writeNewPost() {
+
+            function showForm(classx) {
+                gclassx = classx.id;
+                document.getElementById("classFormDiv").style.display = "block";
+                user = firebase.auth().currentUser;
+                var databaseRef2 = firebase.database().ref('classes/' + user.uid + "/" + classx.id);
+                databaseRef2.on("value", function (snap) {
+                    snap.forEach(function (item) {
+                        ct = snap.val().ClassTitle;
+                        cd = snap.val().ClassDescription;
+                        ci = snap.val().ClassInstructor;
+                        ph = snap.val().Phone;
+                        fb = snap.val().Facebook;
+                        tw = snap.val().Twitter;
+                        em = snap.val().Email;
+                        ws = snap.val().Website;
+                        document.getElementById("title").placeholder = ct;
+                        document.getElementById("desc").placeholder = cd;
+                        document.getElementById("instr").placeholder = ci;
+                        document.getElementById("phone").placeholder = ph;
+                        document.getElementById("face").placeholder = fb;
+                        document.getElementById("tweet").placeholder = tw;
+                        document.getElementById("email").placeholder = em;
+                        document.getElementById("web").placeholder = ws;
+                    });
+                });
+            }
+
+            function writeNewPost() {
                 console.log("Haii");
                 var x = document.forms["classForm"]["title"].value;
                 var y = document.forms["classForm"]["desc"].value;
                 var z = document.forms["classForm"]["instr"].value;
                 var w = document.forms["classForm"]["email"].value;
-		var v = document.forms["classForm"]["phone"].value;
+                var v = document.forms["classForm"]["phone"].value;
                 var u = document.forms["classForm"]["face"].value;
                 var s = document.forms["classForm"]["tweet"].value;
                 var r = document.forms["classForm"]["web"].value;
-                                
-                if(x!=""){
+                if (x != "") {
                     ct = x;
                 }
-                if(y!=""){
+                if (y != "") {
                     cd = y;
                 }
-                if(z!=""){
+                if (z != "") {
                     ci = z;
                 }
-                 if(w!=""){
+                if (w != "") {
                     em = w;
                 }
-		if(v!=""){
+                if (v != "") {
                     ph = v;
                 }
-                if(u!=""){
+                if (u != "") {
                     fb = u;
                 }
-                if(s!=""){
+                if (s != "") {
                     tw = s;
                 }
-                 if(r!=""){
+                if (r != "") {
                     ws = r;
                 }
-                
                 // A post entry.
                 var updates = {
                     ClassTitle: ct
                     , ClassDescription: cd
                     , ClassInstructor: instr
                     , Email: em
-		    , Facebook: fb
+                    , Facebook: fb
                     , Twitter: tw
                     , Website: ws
                     , Phone: ph
-
                 };
                 // Get a key for a new Post.
                 var databaseRef2 = firebase.database().ref('classes/' + user.uid + "/" + gclassx);
                 databaseRef2.update(updates);
                 return false;
             }
-	</script>
+        </script>
         <script type="text/javascript">
             function logOut() {
                 firebase.auth().signOut();
@@ -213,4 +202,3 @@
     </body>
 
     </HTML>
-

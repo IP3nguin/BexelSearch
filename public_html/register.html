@@ -18,6 +18,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> </head>
 
 <body onload="initialise()">
+    <nav class="navbar navbar-inverse navbar-static-top" style="background-color: #4a4a4a;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    <a href="/home" class="navbar-brand"><img src="/img/Bexel_NameOnly.png" height="30" width=""></a>
+                </div>
+                <div id="navbarCollapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home">Home</a></li>
+                        <li><a href="/MyAccount">My Account</a></li>
+                        <li class="active"><a href="/modifyClasses">My Classes</a></li>
+                        <li><a href="/search">Search</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="javascript:logOut();"><strong>Log Out</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     <div class="container">
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g" type="text/javascript"></script>
         <form class="form-horizontal" onSubmit = "return false;">
@@ -142,7 +161,7 @@
          	the variable newClass will hold the key of the newly created Class
         */
         function addNewClass(instructor, title, description, email, facebook, clickLat, clickLon, phone, twitter, website) {
-            var newClassKey = firebase.database().ref().child('classes/'+ firebase.auth().currentUser.uid).push().key;
+            var newClassKey = firebase.database().ref().child('classes'+ firebase.auth().currentUser.uid).push().key;
             firebase.database().ref('classes/' + firebase.auth().currentUser.uid +"/"+ newClassKey).set({
                 ClassInstructor: instructor
                 , ClassTitle: title
