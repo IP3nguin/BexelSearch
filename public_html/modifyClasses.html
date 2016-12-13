@@ -104,11 +104,10 @@
                     databaseRef.on("value", function (snap) {
 				
                         snap.forEach(function (item) {
-
 			    var classid = item.key;
 			    var ul = document.getElementById("classes");
 			    var a = document.createElement("a");
-			    var t = document.createTextNode(classid);
+			    var t = document.createTextNode(databaseRef.OrderByChild(classid).ClassTitle.val());
 			    a.appendChild(t);
 			    a.id = classid;
 			    a.href = "javascript:showForm(" + a.id + ");";
