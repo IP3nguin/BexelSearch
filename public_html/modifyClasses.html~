@@ -83,7 +83,7 @@
 		                <input class="form-control col-xs-10" id="face" type="text" name="face"><br>
 		                <label class="control-label" for="tweet">Twitter:</label>
 		                <input class="form-control col-xs-10" id="tweet" type="text" name="tweet"><br>
-				<button type="submit" class="btn-lg btn-primary">Submit</button>
+
 			</form>
 		</div>
 	</div>
