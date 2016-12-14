@@ -8,8 +8,8 @@
 
     <!--test compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/search.css">
-    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/nav.css">
 
 
     <!-- Icon selection code -->
@@ -23,6 +23,7 @@
 </head>
 
 <body>
+    <div class="back"></div>
 
     <nav class="navbar navbar-inverse navbar-static-top" style="background-color: #4a4a4a;">
         <div class="container-fluid">
@@ -51,28 +52,36 @@
 
     <div class="container">
         <div class="row">
-            <div class="jumbotron jumbocontent">
-                <div class="title">
-                    <h2>Search</h2>
-                </div>
-
-                <form id="searchBox">
-                    <div class="form-group">
-                        <input class="form-control col-xs-10" type="text" id="search" name="search" placeholder="Search..">
-                        <br><br>
+            <div class="col-md-12">
+                <div class="jumbotron jumbocontent">
+                    <div class="title">
+                        <h2>Search</h2>
                     </div>
-                </form>
-                <div id="map" class="map"></div>
+
+                    <form id="searchBox">
+                        <div class="form-group">
+                            <div class="input-group">
+
+                                <input class="form-control" type="text" id="search" name="search" placeholder="Search..">
+                                <span class="input-group-btn">
+                               <button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                        </div>
+                        <br><br>
+                    </form>
+                    <div id="map" class="map"></div>
+                </div>
             </div>
         </div>
     </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- load jquery -->
     <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
     <!-- load firebase library -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g" type="text/javascript"></script>
     <!-- load maps api -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         // initialise firebase
         var config = {
@@ -83,15 +92,13 @@
             messagingSenderId: "325793789014"
         };
         firebase.initializeApp(config);
-
     </script>
-    <script src="/Js/search.js"></script>
+    <script src="Js/search.js"></script>
     <script type="text/javascript">
         function logOut() {
             firebase.auth().signOut();
             window.location = 'index';
         }
-
     </script>
 
 </body>
