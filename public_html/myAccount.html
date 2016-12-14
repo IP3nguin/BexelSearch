@@ -18,6 +18,7 @@
     </head>
 
     <body>
+        <div class="back"></div>
         <nav class="navbar navbar-inverse navbar-static-top" style="background-color: #4a4a4a;">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -39,6 +40,7 @@
         </nav>
         <div class="container">
             <div class="row">
+                <div class="col-md-12">
                 <div class="jumbotron jumbocontent">
                     <form class="form-horizontal" id="changeDetails" onsubmit="writeNewPost()">
                         <div id="changeDetailsFormDiv">
@@ -49,37 +51,43 @@
                         <div class="form-group">
                             <label class="control-label" for="fname">First Name:</label>
                             <input class="form-control col-xs-10" id="fname" type="text" name="fname">
-                            <br>
+                        </div>
+                                                <div class="form-group">
                             <label class="control-label" for="lname">Last Name:</label>
                             <input class="form-control col-xs-10" id="lname" type="text" name="lname">
-                            <br>
+                        </div>
+                                                  <div class="form-group">
                             <label class="control-label" for="email">Email:</label>
                             <input class="form-control col-xs-10" id="email" type="text" name="email">
-                            <br>
+                        </div>
+                                                  <div class="form-group">
                             <label class="control-label" for="uname">Username:</label>
                             <input class="form-control col-xs-10" id="uname" type="text" name="uname">
-                            <br>
-                            <br>
-                            <div class="col-sm-offset-5">
-                                <br>
-                                <br>
-                                <button type="submit" class="btn-lg btn-primary">Submit</button>
-                            </div>
-                        </div>
+                                                      </div>
+                            <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3">
+                                                <button type="submit" class="form-control btn-sub">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                      
+                        
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
         <!--test compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="/css/nav.css">
-        <link rel="stylesheet" href="/css/accountManagement.css">
+        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" href="css/accountManagement.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <!-- load jquery -->
         <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
         <!-- load firebase library -->
-        <script src="/Js/accountManagement.js"></script>
+        <script src="Js/accountManagement.js"></script>
         <script>
             // initialise firebase
             var config = {
