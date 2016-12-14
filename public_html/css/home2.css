@@ -36,6 +36,7 @@
 }
 
 
+
 .image-bg-fixed-height {
     
 	background:  linear-gradient(
@@ -49,18 +50,21 @@
 
 }
 .panel{
-    padding: 20px;
+    padding: 10px;
   background: rgb(34,34,34); /* for IE */
   background: rgba(34,34,34,0.4);
     margin 10px;
+
+    
+    
 
 }
 
 
 .panel>img {
 	margin: 0 auto;
-    opacity: ;
     z-index: 100;
+    
 }
 
 section {
