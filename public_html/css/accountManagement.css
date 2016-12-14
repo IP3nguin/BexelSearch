@@ -55,7 +55,7 @@ button{
     left: 0px;
     background: linear-gradient(
       rgba(246,144,5, 0.15), 
-      rgba(246,144,5, 0.2)
+      rgba(246,144,5, 0.25)
         ),
         url('../img/account.jpg') no-repeat center center fixed;
     transform: scale(1.05);
