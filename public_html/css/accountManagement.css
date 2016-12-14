@@ -1,5 +1,5 @@
 body {
-    background-color: #fa9407;
+    background-color: transparent;
 }
 
 .jumbocontent{
@@ -23,4 +23,46 @@ h1,h2,h5{
 button{
     vertical-align: middle;
     margin-bottom: 10px;
+}
+.btn-sub {
+    background-color: #106ae4;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    height: auto;
+    font-weight: normal;
+    padding: 14px 0;
+    text-transform: uppercase;
+    border-color: #0f6ff2;
+}
+
+.btn-sub:hover,
+.btn-sub:focus {
+    color: #fff;
+    background-color: #0f6ff2;
+    border-color: #0f6ff2;
+}
+
+.back {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background: linear-gradient(
+      rgba(246,144,5, 0.15), 
+      rgba(246,144,5, 0.2)
+        ),
+        url('../img/account.jpg') no-repeat center center fixed;
+    transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    filter: blur(20%;)
+    overflow: hidden;
 }
