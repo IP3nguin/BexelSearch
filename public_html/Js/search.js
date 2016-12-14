@@ -1,4 +1,4 @@
-  var map,chromeLat,chromeLon,locEnable;
+var map,chromeLat,chromeLon,locEnable;
     var Latlng = new google.maps.LatLng(70.38914, -6.600050); //Default Location
     var classRef = firebase.database().ref('classes');
     var mapRefreshed = false;
@@ -44,7 +44,6 @@
             classRef.orderByChild("ClassTitle").equalTo(searchString).on("value", function(snap) { //pull a snapshot of the database from firebase
                 snap.forEach(function(item) {
                     var contentString = "<h2>" + item.val().ClassTitle + "</h2>\n" + item.val().ClassDescription + "\n<h4>Instructor: </h4>" + item.val().ClassInstructor + "\n<h4>Email:  </h4>" + item.val().Email + "\n<h4>Facebook: </h4>" + item.val().Facebook + "\n<h4>Twitter: </h4>" + item.val().Twitter + "\n<h4>Phone: </h4>" + item.val().Phone + "\n<h4>Website: </h4>" + item.val().Website; //set the content string for this title
-
                     var ClassLoc = new google.maps.LatLng(item.val().LocationLat, item.val().LocationLong); //set the location for this title
                     var marker = new google.maps.Marker({ //place the marker for this title
                         position: ClassLoc,

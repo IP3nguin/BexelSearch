@@ -73,10 +73,10 @@
                 <div class="col-md-6">
                     <h1 class="section-heading">Welcome To Bexel</h1>
                     <p class="lead section-lead">The only tool you need to find and host classes in your area.</p>
-                    <p class="section-paragraph">Bexel is a app designed to allow you to quickly and easily find classes in your area for whatever skill or hobby you are interested. What ever you are looking for you can search for it and see locations near you where that class is going on.</p>
+                    <p class="section-paragraph">Bexel is an app designed to allow you to quickly and easily find classes in your area for whatever skill or hobby you are interested in. Whatever you are looking for, you can search for it and see locations near you where that class is going on.</p>
                 </div>
                 <div class="col-md-5 col-md-offset-1">
-                    <input type="button" onclick="search" class=" btn btn-search btn-block" value="Search now">
+                    <input type="button" onclick="location.href = 'http://www.bexelsearch.tk/search';" class=" btn btn-search btn-block" value="Search now">
                 </div>
             </div>
         </div>
@@ -91,23 +91,41 @@
             <div class="row">
                 <div class="col-md-6">
                     <h1 class="section-heading">More of a teacher?</h1>
-                    <p class="lead section-lead">Bexel is community driven and the tutors you find are user just like you.</p>
-                    <p class="section-paragraph">If you are interested in running a class of you own, just use our easy interface to create your own class listing and how it included on our map!</p>
+                    <p class="lead section-lead">Bexel is community driven and the tutors you find are users just like you.</p>
+                    <p class="section-paragraph">If you are interested in running a class of your own, just use our easy interface to create your own class listing and have it included on our map!</p>
                 </div>
                 <div class="col-md-5 col-md-offset-1">
-                    <input type="button" onclick="search" class=" btn btn-search btn-block" value="Create Class">
+                    <input type="button" onclick="location.href = 'http://www.bexelsearch.tk/register';" class=" btn btn-search btn-block" value="Create Class">
                 </div>
             </div>
 
         </div>
 
     </section>
-
-
-
+    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="Js/home.js"></script>
+
+    <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g",
+                authDomain: "bexel-ed8b3.firebaseapp.com",
+                databaseURL: "https://bexel-ed8b3.firebaseio.com",
+                storageBucket: "bexel-ed8b3.appspot.com",
+                messagingSenderId: "325793789014"
+            };
+            firebase.initializeApp(config);
+
+        </script>
+        <script type="text/javascript">
+            function logOut() {
+                firebase.auth().signOut();
+                window.location = 'index';
+            }
+
+        </script>
 
 
 </body>
