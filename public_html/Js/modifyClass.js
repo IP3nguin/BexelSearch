@@ -11,7 +11,7 @@ var user, ct, cd, ci, ph, fb, tw, em, ws;
                         snap.forEach(function (item) {
                             var classid = item.key;
                             var classtitle = item.val().ClassTitle;        
-                            $("#list").append('<div class = "formgroup"><div class = "row"><div class = "col-md-3"><a href="' + "javascript:showForm(" + classid + ");" + '">' + classtitle + '</a><div></div></div></div>');
+                            $("#list").append('<div class = "formgroup"><div class = "row"><div class = "col-md-3"><a href="' + "javascript:showForm('"+classid+"');" + '">' + classtitle + '</a><div></div></div></div>');
                         });
                     });
                     unsub(); //unsub() here is used to listen on pageload for a user if one is found then move on, if not then stop listening as the return value of unsub() is the function to kill the listener.
@@ -20,10 +20,11 @@ var user, ct, cd, ci, ph, fb, tw, em, ws;
             });
 
             function showForm(classx) {
-                gclassx = classx.id;
-                document.getElementById("classFormDiv").style.display = "block";
+                gclassx = classx;
+    
+               $("#sentModal").modal(); document.getElementById("classFormDiv").style.display = "block";
                 user = firebase.auth().currentUser;
-                var databaseRef2 = firebase.database().ref('classes/' + user.uid + "/" + gclassx);
+                var databaseRef2 = firebase.database().ref('classes/' + user.uid + "/" + classx);
                 databaseRef2.on("value", function (snap) {
                     snap.forEach(function (item) {
                         ct = snap.val().ClassTitle;
