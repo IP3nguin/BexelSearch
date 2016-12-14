@@ -20,7 +20,7 @@ var user, ct, cd, ci, ph, fb, tw, em, ws;
             });
 
             function showForm(classx) {
-                gclassx = classx;
+                gclassx = classx.id;
                 document.getElementById("classFormDiv").style.display = "block";
                 user = firebase.auth().currentUser;
                 var databaseRef2 = firebase.database().ref('classes/' + user.uid + "/" + gclassx);
