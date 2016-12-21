@@ -13,11 +13,14 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f69005">
     <meta name="theme-color" content="#fca631">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/classes.css">
 </head>
 
 <body onload="initialise()">
-    <div class="back"></div>
+    
     
     <nav class="navbar navbar-inverse navbar-static-top" style="background-color: #4a4a4a;">
         <div class="container-fluid">
@@ -38,6 +41,7 @@
             </div>
         </div>
     </nav>
+    <div class="back"></div>
 
     <div class="container">
         <div class="row">
@@ -84,7 +88,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-sm-6 col-sm-offset-3">
-                                    <button type="submit" class="btn btn-sub form-control">Submit</button>
+                                    <button type="submit" onclick="submitForm()" class="btn btn-sub form-control">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -106,10 +110,9 @@
 
 
 
-    <link rel="stylesheet" href="css/accountManagement.css">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHb_Ra7dl02OImTNyEnLoGek4IA5Ck84g" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
